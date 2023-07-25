@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Backend Task: E-commerce API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Prerequisites
 
-## About Laravel
+1.  [Composer](https://getcomposer.org/) installed
+2.  PHP 8.2 installed
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1.  Clone the repository
+2.  Install dependencies using `composer install`
+3.  Copy `.env.example` to `.env`
+    `cp .env.example .env`
+4.  Generate app key using `php artisan key:generate`
+5.  Add database credentials on `.env` file
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=ecommerce-api
+    DB_USERNAME=newuser
+    DB_PASSWORD=password
+    ```
+6.  Run migrations using `php artisan migrate`
+7.  Run the server using `php artisan serve`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## API Documentation
 
-## Learning Laravel
+### Product Endpoints
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Get all products
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+`GET /api/products`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##### Query Parameters
 
-## Laravel Sponsors
+| Parameter | Type   | Description                                         |
+| --------- | ------ | --------------------------------------------------- |
+| page      | number | The page number to return. Default: 1               |
+| perPage   | number | The number of items to return per page. Default: 10 |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md) with pagination.
 
-### Premium Partners
+#### Get a product
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+`GET /api/products/{id}`
 
-## Contributing
+Returns a [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Create a product
 
-## Code of Conduct
+`POST /api/products`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+##### Request Body
 
-## Security Vulnerabilities
+```json
+{
+    "name": "Product iphone 11",
+    "description": "medium text product 6 desc",
+    "base_price": 450,
+    "is_active": true,
+    "variants": [
+        {
+            "name": "Green",
+            "additional_cost": 0,
+            "stock_count": 10
+        },
+        {
+            "name": "Navy Blue",
+            "additional_cost": 10,
+            "stock_count": 10
+        }
+    ]
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Returns newly created [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
 
-## License
+#### Update a product
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`PUT /api/products/{id}`
+
+##### Request Body
+
+```json
+{
+    "name": "Product 6",
+    "description": "medium text product 6 desc",
+    "base_price": 450,
+    "is_active": true,
+    "variants": [
+        {
+            "id": 21,
+            "name": "Green",
+            "additional_cost": 5,
+            "stock_count": 10
+        },
+        {
+            "name": "Space Black",
+            "additional_cost": 10,
+            "stock_count": 20
+        }
+    ]
+}
+```
+
+Returns updated [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
+
+#### Delete a product
+
+`DELETE /api/products/{id}`
+
+##### Response Body
+
+```json
+{
+    "message": "Product deleted successfully"
+}
+```
+
+#### Search products
+
+`GET /api/products/search`
+
+##### Query Parameters
+
+| Parameter | Type   | Description     |
+| --------- | ------ | --------------- |
+| term      | string | The search term |
+
+Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md) matching the search term.
+
+#### Error Responses
+
+##### 404 Not Found
+
+```json
+{
+    "message": "No query results for model [App\\Models\\Product] 1"
+}
+```
+
+##### 422 Unprocessable Entity
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "name": ["The name field is required."],
+        "description": ["The description field is required."],
+        "base_price": ["The base price field is required."],
+        "variants": ["The variants field is required."]
+    }
+}
+```
+
+## Assumptions
+
+1. A product can have multiple variants.
+2. A product cannot be created without variants.
+3. Product variants are synced with the product. If a variant is not present in the update request, it will be deleted from the database.
+
+## Architectural Decisions
+
+1. Used Laravel framework to build the API.
+2. Used Laravel's API Resource to transform the data.
+3. Used Laravel's validation to validate the request data.
+4. Used Laravel's pagination to paginate the data.
+5. Used Laravel's database migrations to create the database schema.

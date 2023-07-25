@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('products')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index');
+    Route::get('/search', 'index');
     Route::post('/', 'store');
     Route::get('/{product}', 'show');
     Route::put('/{product}', 'update');
