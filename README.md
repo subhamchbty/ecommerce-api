@@ -9,8 +9,7 @@
 
 1.  Clone the repository
 2.  Install dependencies using `composer install`
-3.  Copy `.env.example` to `.env`
-    `cp .env.example .env`
+3.  Copy `.env.example` to `.env` using `cp .env.example .env`
 4.  Generate app key using `php artisan key:generate`
 5.  Add database credentials on `.env` file
     ```
@@ -153,6 +152,10 @@ Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-a
     }
 }
 ```
+
+## Testing
+
+Run tests using `php artisan test`
 
 ## Assumptions
 
