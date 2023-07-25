@@ -22,6 +22,8 @@ class ProductResource extends JsonResource
             'base_price' => $this->base_price,
             'is_active' => $this->is_active,
             'variants' => ProductVariantResource::collection($this->whenLoaded('variants')),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
