@@ -19,9 +19,10 @@ class ProductVariant extends Model
         'additional_cost' => 'double',
     ];
 
-    public function product()
+    // new factory method
+    protected static function newFactory()
     {
-        return $this->belongsTo(Product::class);
+        return \Database\Factories\ProductVariantFactory::new();
     }
 
     public static function boot()
@@ -31,5 +32,10 @@ class ProductVariant extends Model
         static::creating(function ($variant) {
             $variant->sku = strtoupper(substr(md5(microtime()), rand(0, 26), 5));
         });
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

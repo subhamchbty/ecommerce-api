@@ -21,9 +21,9 @@ class Product extends Model
         'is_active' => 'boolean',
     ];
 
-    public function variants()
+    public static function newFactory()
     {
-        return $this->hasMany(ProductVariant::class);
+        return \Database\Factories\ProductFactory::new();
     }
 
     public static function boot()
@@ -33,5 +33,10 @@ class Product extends Model
         static::creating(function ($product) {
             $product->slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $product->name));
         });
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
     }
 }
