@@ -39,13 +39,13 @@
 | page      | number | The page number to return. Default: 1               |
 | perPage   | number | The number of items to return per page. Default: 10 |
 
-Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md) with pagination.
+Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/blob/main/product-resource.md) with pagination.
 
 #### Get a product
 
 `GET /api/products/{id}`
 
-Returns a [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
+Returns a [product resource](https://github.com/subhamchbty/ecommerce-api/blob/main/product-resource.md).
 
 #### Create a product
 
@@ -74,7 +74,7 @@ Returns a [product resource](https://github.com/subhamchbty/ecommerce-api/produc
 }
 ```
 
-Returns newly created [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
+Returns newly created [product resource](https://github.com/subhamchbty/ecommerce-api/blob/main/product-resource.md).
 
 #### Update a product
 
@@ -104,7 +104,7 @@ Returns newly created [product resource](https://github.com/subhamchbty/ecommerc
 }
 ```
 
-Returns updated [product resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md).
+Returns updated [product resource](https://github.com/subhamchbty/ecommerce-api/blob/main/product-resource.md).
 
 #### Delete a product
 
@@ -128,7 +128,7 @@ Returns updated [product resource](https://github.com/subhamchbty/ecommerce-api/
 | --------- | ------ | --------------- |
 | term      | string | The search term |
 
-Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/product-resource.md) matching the search term.
+Returns a list of [products resource](https://github.com/subhamchbty/ecommerce-api/blob/main/product-resource.md) matching the search term.
 
 #### Error Responses
 
