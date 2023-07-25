@@ -61,7 +61,7 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return new ProductResource($product->with('variants')->find($product->id));
+            return (new ProductResource($product->with('variants')->find($product->id)))->response()->setStatusCode(201);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json(['message' => $th->getMessage()], 500);
